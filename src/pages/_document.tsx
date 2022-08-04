@@ -16,10 +16,20 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
           <meta
             property="example"
             content="Você pode conhecer o tipo de Pokémon, seus pontos fortes, desvantagens e habilidades"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+            rel="stylesheet"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+            rel="stylesheet"
+          ></link>
         </Head>
         <body className="font-sans">
           <Main />

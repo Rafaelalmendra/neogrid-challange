@@ -7,13 +7,10 @@ const nextConfig = {
   swcMinify: true,
   ...withLess({
     lessLoaderOptions: {
-      /* ... */
       lessOptions: {
-        /* ... */
         modifyVars: {
           "primary-color": "#FEDC47",
           "border-radius-base": "10px",
-          /* ... */
         },
       },
     },

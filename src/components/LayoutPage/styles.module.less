@@ -1,0 +1,83 @@
+@import "styles/colors.less";
+
+.containerLayout {
+  max-width: 100vw;
+
+  .header {
+    width: 100%;
+    height: 96px;
+    padding: 0 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: linear-gradient(90deg, #ffe572 0%, #fedc47 100%);
+    box-shadow: 0px 10px 13px rgba(0, 0, 0, 0.1);
+
+    .headerContent {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 1140px;
+      height: 100%;
+
+      ul {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        margin: 0;
+
+        li {
+          font-size: 1.2rem;
+          font-weight: 500;
+          font-family: "Roboto", sans-serif;
+          padding: 0 18px;
+          transition: transform 0.2s ease-in-out;
+
+          &:hover {
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+
+    .logoContainer {
+      position: relative;
+      width: 146px;
+      height: 53px;
+    }
+  }
+
+  .containerContent {
+    width: 1140px;
+    max-width: 100%;
+  }
+
+  .footerContainer {
+    width: 100%;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: "Roboto", sans-serif;
+
+      svg {
+        fill: @yellow;
+      }
+
+      a {
+        text-decoration: underline;
+        transition: color 0.2s ease-in-out;
+
+        &:hover {
+          color: @blue;
+        }
+      }
+    }
+  }
+}
