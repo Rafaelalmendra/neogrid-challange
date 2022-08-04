@@ -47,7 +47,7 @@ const menu = (
       {
         key: "2",
         label: (
-          <Link href="/pokemon">
+          <Link href="/pokemons">
             <a>Pokémon</a>
           </Link>
         ),
