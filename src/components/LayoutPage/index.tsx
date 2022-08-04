@@ -65,7 +65,11 @@ export const LayoutPage = ({ children }: LayoutProps) => {
       <Header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logoContainer}>
-            <Image src="/images/logo.png" alt="logo" layout="fill" />
+            <Image
+              src="/images/logo.png"
+              alt="Logo Principal do Pokémon Universe"
+              layout="fill"
+            />
           </div>
 
           {!isMobile ? (
@@ -76,7 +80,7 @@ export const LayoutPage = ({ children }: LayoutProps) => {
                     <a
                       style={{
                         color: `${
-                          router.pathname === link.url ? "#0063f7" : "#3a3a3c"
+                          router.pathname === link.url ? "#3D67BA" : "#3a3a3c"
                         }`,
                       }}
                     >
@@ -98,12 +102,16 @@ export const LayoutPage = ({ children }: LayoutProps) => {
         </div>
       </Header>
 
-      <Content className={styles.containerContent}>{children}</Content>
+      <Content className={styles.containerContent}>
+        <div className={styles.content}>{children}</div>
+      </Content>
 
       <Footer className={styles.footerContainer}>
         <span>
           Feito com <HeartOutlined /> Por{" "}
-          <a href="https://rafaelalmendra.com">Rafael Almendra</a>
+          <a href="https://rafaelalmendra.com" target="_blank" rel="noreferrer">
+            Rafael Almendra
+          </a>
         </span>
       </Footer>
     </Layout>
