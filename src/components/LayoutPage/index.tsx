@@ -1,13 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useMedia } from "use-media";
 
 //design-system
-import { Layout } from "antd";
+import { Layout, Dropdown, Menu, Space } from "antd";
 import { Content, Footer, Header } from "antd/lib/layout/layout";
 
 //icons
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartOutlined, MenuOutlined } from "@ant-design/icons";
 
 //styles
 import styles from "./styles.module.less";
@@ -28,12 +29,36 @@ const links: LinksProps[] = [
   },
   {
     url: "/pokemons",
-    name: "Pokemons",
+    name: "Pokémons",
   },
 ];
 
+const menu = (
+  <Menu
+    items={[
+      {
+        key: "1",
+        label: (
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        ),
+      },
+      {
+        key: "2",
+        label: (
+          <Link href="/pokemon">
+            <a>Pokémon</a>
+          </Link>
+        ),
+      },
+    ]}
+  />
+);
+
 export const LayoutPage = ({ children }: LayoutProps) => {
   const router = useRouter();
+  const isMobile = useMedia({ maxWidth: "768px" });
 
   return (
     <Layout className={styles.containerLayout}>
@@ -43,22 +68,33 @@ export const LayoutPage = ({ children }: LayoutProps) => {
             <Image src="/images/logo.png" alt="logo" layout="fill" />
           </div>
 
-          <ul>
-            {links.map((link) => (
-              <li
-                key={link.url}
-                style={{
-                  color: `${
-                    router.pathname === link.url ? "#0063f7" : "#3a3a3c"
-                  }`,
-                }}
-              >
-                <Link href={link.url}>
-                  <a>{link.name}</a>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {!isMobile ? (
+            <ul>
+              {links.map((link) => (
+                <li key={link.url}>
+                  <Link href={link.url}>
+                    <a
+                      style={{
+                        color: `${
+                          router.pathname === link.url ? "#0063f7" : "#3a3a3c"
+                        }`,
+                      }}
+                    >
+                      {link.name}
+                    </a>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <MenuOutlined />
+                </Space>
+              </a>
+            </Dropdown>
+          )}
         </div>
       </Header>
 

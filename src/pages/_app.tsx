@@ -3,6 +3,7 @@ import { ConfigProvider } from "antd";
 
 //styles
 import "styles/global.less";
+import "antd/dist/antd.less";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
