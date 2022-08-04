@@ -65,11 +65,15 @@ export const LayoutPage = ({ children }: LayoutProps) => {
       <Header className={styles.header}>
         <div className={styles.headerContent}>
           <div className={styles.logoContainer}>
-            <Image
-              src="/images/logo.png"
-              alt="Logo Principal do Pokémon Universe"
-              layout="fill"
-            />
+            <Link href="/">
+              <a>
+                <Image
+                  src="/images/logo.png"
+                  alt="Logo Principal do Pokémon Universe"
+                  layout="fill"
+                />
+              </a>
+            </Link>
           </div>
 
           {!isMobile ? (

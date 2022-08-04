@@ -31,7 +31,7 @@ const Home: NextPage = () => {
               Você pode conhecer o tipo de Pokémon, seus pontos fortes,
               desvantagens e habilidades
             </p>
-            <Link href="/pokemon">
+            <Link href="/pokemons">
               <a>
                 <Button type="primary" size="large">
                   Encontre seus Pokémons
