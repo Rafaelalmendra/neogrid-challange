@@ -25,10 +25,24 @@
   }
 
   .cardsContainer {
-    display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 3fr);
+    grid-gap: 24px;
     justify-content: space-between;
-    gap: 1rem;
     margin-top: 2rem;
+  }
+
+  .totalText {
+    margin-top: 1.4rem;
+
+    font-size: 1.2rem;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    color: @dark-1;
+
+    strong {
+      color: @blue;
+    }
   }
 }

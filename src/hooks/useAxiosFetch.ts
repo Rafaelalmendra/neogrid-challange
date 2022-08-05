@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { api } from "services/api";
 
 export const useAxiosFetch = () => {
-  const [pokemonData, setPokemonData] = useState<any>(null);
   const [typesData, setTypesData] = useState<any>(null);
-  const [fetchError, setFetchError] = useState("");
+  const [pokemonData, setPokemonData] = useState<any>(null);
+
   const [loadingTypes, setLoadingTypes] = useState(false);
   const [loadingPokemons, setLoadingPokemons] = useState(false);
+
+  const [fetchError, setFetchError] = useState("");
 
   const token = process.env.API_KEY;
 
@@ -28,9 +30,8 @@ export const useAxiosFetch = () => {
         }
       } catch (error: any) {
         setFetchError(error.message);
-        [];
       } finally {
-        setTimeout(() => setLoadingTypes(false), 1000);
+        setLoadingTypes(false);
       }
     };
 
@@ -51,9 +52,8 @@ export const useAxiosFetch = () => {
         }
       } catch (error: any) {
         setFetchError(error.message);
-        [];
       } finally {
-        setTimeout(() => setLoadingPokemons(false), 1000);
+        setLoadingPokemons(false);
       }
     };
 
