@@ -2,7 +2,25 @@
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1rem;
+  flex-direction: column;
+  padding: 6rem 1rem;
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: @dark-1;
+  }
+
+  .filtersContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 800px;
+    flex-wrap: wrap;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
 }
