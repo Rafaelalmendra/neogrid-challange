@@ -6,7 +6,7 @@ import useMedia from "use-media";
 import { useAxiosFetch } from "hooks/useAxiosFetch";
 
 //design-system
-import { Input } from "antd";
+import { Input, Modal } from "antd";
 
 //components
 import { HeadSeo } from "components/HeadSeo";
@@ -20,6 +20,7 @@ import { CarouselCards } from "components/CarouselCards";
 
 //styles
 import styles from "styles/pages/pokemons.module.less";
+import { CardDetailsModal } from "@/components/CardDetailsModal";
 
 const PokemonsPage: NextPage = () => {
   const { Search } = Input;
@@ -29,10 +30,10 @@ const PokemonsPage: NextPage = () => {
 
   const [pokemons, setPokemons] = useState<any[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<any[]>([]);
-
   const [filters, setFilters] = useState<string[]>([]);
   const [filterByName, setFilterByName] = useState<string>("");
   const [filterByType, setFilterByType] = useState<string>("all");
+  const [showModalDetails, setShowModalDetails] = useState<boolean>(false);
 
   useEffect(() => {
     setFilters(typesData);
@@ -74,6 +75,15 @@ const PokemonsPage: NextPage = () => {
     handleFilters();
   }, [filterByType, filterByName, pokemons, filteredPokemons]);
 
+  const handleFilterByType = (type: string) => {
+    setFilterByName("");
+    setFilterByType(type);
+  };
+
+  const handleShowModalDetails = () => {
+    setShowModalDetails(true);
+  };
+
   return (
     <>
       <HeadSeo
@@ -91,11 +101,8 @@ const PokemonsPage: NextPage = () => {
             ) : (
               <div className={styles.typesContainer}>
                 <FilterButton
-                  onClick={() => {
-                    setFilterByName("");
-                    setFilterByType("all");
-                  }}
                   active={filterByType === "all"}
+                  onClick={() => handleFilterByType("all")}
                 >
                   Todos
                 </FilterButton>
@@ -104,10 +111,7 @@ const PokemonsPage: NextPage = () => {
                   <FilterButton
                     key={index}
                     active={filterByType === filter}
-                    onClick={() => {
-                      setFilterByName("");
-                      setFilterByType(filter);
-                    }}
+                    onClick={() => handleFilterByType(filter)}
                   >
                     {filter}
                   </FilterButton>
@@ -133,6 +137,7 @@ const PokemonsPage: NextPage = () => {
                     <CardPokemon
                       key={pokemon?.id}
                       imageLink={pokemon?.images?.large}
+                      onClick={() => setShowModalDetails(true)}
                     />
                   ))
                 : filteredPokemons
@@ -141,6 +146,7 @@ const PokemonsPage: NextPage = () => {
                       <CardPokemon
                         key={pokemon?.id}
                         imageLink={pokemon?.images?.large}
+                        onClick={() => setShowModalDetails(true)}
                       />
                     ))}
             </CarouselCards>
@@ -151,6 +157,7 @@ const PokemonsPage: NextPage = () => {
                     <CardPokemon
                       key={pokemon?.id}
                       imageLink={pokemon?.images?.large}
+                      onClick={() => setShowModalDetails(true)}
                     />
                   ))
                 : filteredPokemons
@@ -159,6 +166,7 @@ const PokemonsPage: NextPage = () => {
                       <CardPokemon
                         key={pokemon?.id}
                         imageLink={pokemon?.images?.large}
+                        onClick={() => setShowModalDetails(true)}
                       />
                     ))}
             </div>
@@ -168,6 +176,14 @@ const PokemonsPage: NextPage = () => {
             <TotalCards total={filteredPokemons?.slice(0, 40)?.length} />
           )}
         </main>
+
+        <Modal
+          title="teste"
+          visible={showModalDetails}
+          onCancel={() => setShowModalDetails(false)}
+        >
+          <CardDetailsModal />
+        </Modal>
       </LayoutPage>
     </>
   );
