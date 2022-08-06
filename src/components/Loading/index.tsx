@@ -9,7 +9,8 @@ export const Loading = () => {
         src="/images/pokeball-animation.gif"
         width={100}
         height={100}
-        alt="animação"
+        alt="Animação de Loading"
+        loading="eager"
       />
     </div>
   );

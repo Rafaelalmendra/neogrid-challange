@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
+import { Input } from "antd";
 
 //hooks
 import { useAxiosFetch } from "hooks/useAxiosFetch";
@@ -18,12 +19,13 @@ import styles from "styles/pages/pokemons.module.less";
 const PokemonsPage: NextPage = () => {
   const { pokemonData, typesData, loadingTypes, loadingPokemons } =
     useAxiosFetch();
+  const { Search } = Input;
 
   const [pokemons, setPokemons] = useState<any[]>([]);
-  const [filters, setFilters] = useState<String[]>([]);
+  const [filters, setFilters] = useState<string[]>([]);
   const [filteredCards, setFilteredCards] = useState<any[]>([]);
-  const [filterByName, setFilterByName] = useState<String>("");
-  const [filterByType, setFilterByType] = useState<String>("all");
+  const [filterByName, setFilterByName] = useState<string>("");
+  const [filterByType, setFilterByType] = useState<string>("all");
 
   useEffect(() => {
     setFilters(typesData);
@@ -81,7 +83,10 @@ const PokemonsPage: NextPage = () => {
             {!loadingTypes ? (
               <div className={styles.filtersContainer}>
                 <FilterButton
-                  onClick={() => setFilterByType("all")}
+                  onClick={() => {
+                    setFilterByName("");
+                    setFilterByType("all");
+                  }}
                   active={filterByType === "all"}
                 >
                   Todos
@@ -90,7 +95,10 @@ const PokemonsPage: NextPage = () => {
                   <FilterButton
                     key={index}
                     active={filterByType === filter}
-                    onClick={() => setFilterByType(filter)}
+                    onClick={() => {
+                      setFilterByName("");
+                      setFilterByType(filter);
+                    }}
                   >
                     {filter}
                   </FilterButton>
@@ -100,7 +108,14 @@ const PokemonsPage: NextPage = () => {
               <p>Buscando tipos...</p>
             )}
 
-            <div>pesquisa</div>
+            <div>
+              <Search
+                style={{ width: 258 }}
+                placeholder="Procure um Pokémon..."
+                value={filterByName}
+                onChange={(e) => setFilterByName(e?.target?.value)}
+              />
+            </div>
           </div>
 
           {loadingPokemons && <Loading />}
