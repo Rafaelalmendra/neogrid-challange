@@ -12,6 +12,7 @@ import { Input } from "antd";
 import { HeadSeo } from "components/HeadSeo";
 import { Loading } from "components/Loading";
 import { NoResults } from "components/NoResults";
+import { TotalCards } from "components/TotalCards";
 import { LayoutPage } from "components/LayoutPage";
 import { CardPokemon } from "components/CardPokemon";
 import { FilterButton } from "components/FilterButton";
@@ -27,8 +28,9 @@ const PokemonsPage: NextPage = () => {
     useAxiosFetch();
 
   const [pokemons, setPokemons] = useState<any[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<any[]>([]);
+
   const [filters, setFilters] = useState<string[]>([]);
-  const [filteredCards, setFilteredCards] = useState<any[]>([]);
   const [filterByName, setFilterByName] = useState<string>("");
   const [filterByType, setFilterByType] = useState<string>("all");
 
@@ -45,33 +47,32 @@ const PokemonsPage: NextPage = () => {
         const filterOnlyByName = pokemons?.filter((card: any) =>
           card.name.toLowerCase().includes(lowerSearchByName)
         );
-
-        setFilteredCards(filterOnlyByName);
+        setFilteredPokemons(filterOnlyByName);
       }
 
       if (!filterByName && filterByType !== "all") {
         const filterOnlyByType = pokemons?.filter(
           (card: any) => card.types[0] === filterByType
         );
-        setFilteredCards(filterOnlyByType);
+        setFilteredPokemons(filterOnlyByType);
       }
 
       if (filterByName && filterByType !== "all") {
-        const filterByNameAndType = filteredCards?.filter(
+        const filterByNameAndType = filteredPokemons?.filter(
           (card) =>
             card.name.toLowerCase().includes(lowerSearchByName) &&
             card.types[0] === filterByType
         );
-        setFilteredCards(filterByNameAndType);
+        setFilteredPokemons(filterByNameAndType);
       }
 
       if (!filterByName && filterByType === "all") {
-        setFilteredCards(pokemons);
+        setFilteredPokemons(pokemons);
       }
     };
 
     handleFilters();
-  }, [filterByType, filterByName, pokemons, filteredCards]);
+  }, [filterByType, filterByName, pokemons, filteredPokemons]);
 
   return (
     <>
@@ -85,7 +86,9 @@ const PokemonsPage: NextPage = () => {
           <h2>Escolha seu tipo de Pokémon</h2>
 
           <div className={styles.filters}>
-            {!loadingTypes ? (
+            {loadingTypes ? (
+              <p>Buscando tipos...</p>
+            ) : (
               <div className={styles.typesContainer}>
                 <FilterButton
                   onClick={() => {
@@ -110,33 +113,29 @@ const PokemonsPage: NextPage = () => {
                   </FilterButton>
                 ))}
               </div>
-            ) : (
-              <p>Buscando tipos...</p>
             )}
 
-            <div>
-              <Search
-                style={{ width: isMobile ? "100%" : 258 }}
-                placeholder="Procure um Pokémon..."
-                value={filterByName}
-                onChange={(e) => setFilterByName(e?.target?.value)}
-              />
-            </div>
+            <Search
+              value={filterByName}
+              placeholder="Procure um Pokémon..."
+              style={{ width: isMobile ? "100%" : 258 }}
+              onChange={(e) => setFilterByName(e?.target?.value)}
+            />
           </div>
 
           {loadingPokemons && <Loading />}
-          {filteredCards?.length === 0 && <NoResults />}
+          {filteredPokemons?.length === 0 && <NoResults />}
 
           {isMobile ? (
             <CarouselCards>
-              {!filteredCards
+              {!filteredPokemons
                 ? pokemons?.map((pokemon) => (
                     <CardPokemon
                       key={pokemon?.id}
                       imageLink={pokemon?.images?.large}
                     />
                   ))
-                : filteredCards
+                : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
                       <CardPokemon
@@ -147,14 +146,14 @@ const PokemonsPage: NextPage = () => {
             </CarouselCards>
           ) : (
             <div className={styles.cardsContainer}>
-              {!filteredCards
+              {!filteredPokemons
                 ? pokemons?.map((pokemon) => (
                     <CardPokemon
                       key={pokemon?.id}
                       imageLink={pokemon?.images?.large}
                     />
                   ))
-                : filteredCards
+                : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
                       <CardPokemon
@@ -165,10 +164,8 @@ const PokemonsPage: NextPage = () => {
             </div>
           )}
 
-          {!loadingPokemons && filteredCards?.length > 0 && (
-            <p className={styles.totalText}>
-              Total - <strong>{filteredCards?.slice(0, 40)?.length}</strong>
-            </p>
+          {!loadingPokemons && filteredPokemons?.length > 0 && (
+            <TotalCards total={filteredPokemons?.slice(0, 40)?.length} />
           )}
         </main>
       </LayoutPage>

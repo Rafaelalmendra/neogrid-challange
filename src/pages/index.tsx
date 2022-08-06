@@ -6,11 +6,11 @@ import type { NextPage } from "next";
 import { Button } from "antd";
 
 //components
+import { HeadSeo } from "components/HeadSeo";
 import { LayoutPage } from "components/LayoutPage";
 
 //styles
 import styles from "styles/pages/home.module.less";
-import { HeadSeo } from "@/components/HeadSeo";
 
 const Home: NextPage = () => {
   return (
@@ -19,18 +19,21 @@ const Home: NextPage = () => {
         title="Home | Pokemon Universe"
         content="Aqui você pode conhecer o tipo de Pokémon, seus pontos fortes,desvantagens e habilidades"
       />
+
       <LayoutPage>
         <main className={styles.container}>
           <div className={styles.content}>
             <h1>
               Conheça todos os
               <br />
-              <span>Pokémons</span> e seus tipos
+              <strong>Pokémons</strong> e seus tipos
             </h1>
+
             <p>
               Você pode conhecer o tipo de Pokémon, seus pontos fortes,
               desvantagens e habilidades
             </p>
+
             <Link href="/pokemons">
               <a>
                 <Button type="primary" size="large">
