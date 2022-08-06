@@ -1,25 +1,30 @@
 import { useEffect, useState } from "react";
 import type { NextPage } from "next";
-import { Input } from "antd";
+import useMedia from "use-media";
 
 //hooks
 import { useAxiosFetch } from "hooks/useAxiosFetch";
 
+//design-system
+import { Input } from "antd";
+
 //components
 import { HeadSeo } from "components/HeadSeo";
 import { Loading } from "components/Loading";
+import { NoResults } from "components/NoResults";
 import { LayoutPage } from "components/LayoutPage";
-import { NoResults } from "@/components/NoResults";
 import { CardPokemon } from "components/CardPokemon";
 import { FilterButton } from "components/FilterButton";
+import { CarouselCards } from "components/CarouselCards";
 
 //styles
 import styles from "styles/pages/pokemons.module.less";
 
 const PokemonsPage: NextPage = () => {
+  const { Search } = Input;
+  const isMobile = useMedia({ maxWidth: "768px" });
   const { pokemonData, typesData, loadingTypes, loadingPokemons } =
     useAxiosFetch();
-  const { Search } = Input;
 
   const [pokemons, setPokemons] = useState<any[]>([]);
   const [filters, setFilters] = useState<string[]>([]);
@@ -79,9 +84,9 @@ const PokemonsPage: NextPage = () => {
         <main className={styles.container}>
           <h2>Escolha seu tipo de Pokémon</h2>
 
-          <div className={styles.content}>
+          <div className={styles.filters}>
             {!loadingTypes ? (
-              <div className={styles.filtersContainer}>
+              <div className={styles.typesContainer}>
                 <FilterButton
                   onClick={() => {
                     setFilterByName("");
@@ -91,6 +96,7 @@ const PokemonsPage: NextPage = () => {
                 >
                   Todos
                 </FilterButton>
+
                 {filters?.map((filter, index: number) => (
                   <FilterButton
                     key={index}
@@ -110,7 +116,7 @@ const PokemonsPage: NextPage = () => {
 
             <div>
               <Search
-                style={{ width: 258 }}
+                style={{ width: isMobile ? "100%" : 258 }}
                 placeholder="Procure um Pokémon..."
                 value={filterByName}
                 onChange={(e) => setFilterByName(e?.target?.value)}
@@ -121,23 +127,43 @@ const PokemonsPage: NextPage = () => {
           {loadingPokemons && <Loading />}
           {filteredCards?.length === 0 && <NoResults />}
 
-          <div className={styles.cardsContainer}>
-            {!filteredCards
-              ? pokemons?.map((pokemon) => (
-                  <CardPokemon
-                    key={pokemon?.id}
-                    imageLink={pokemon?.images?.large}
-                  />
-                ))
-              : filteredCards
-                  ?.slice(0, 40)
-                  ?.map((pokemon) => (
+          {isMobile ? (
+            <CarouselCards>
+              {!filteredCards
+                ? pokemons?.map((pokemon) => (
                     <CardPokemon
                       key={pokemon?.id}
                       imageLink={pokemon?.images?.large}
                     />
-                  ))}
-          </div>
+                  ))
+                : filteredCards
+                    ?.slice(0, 40)
+                    ?.map((pokemon) => (
+                      <CardPokemon
+                        key={pokemon?.id}
+                        imageLink={pokemon?.images?.large}
+                      />
+                    ))}
+            </CarouselCards>
+          ) : (
+            <div className={styles.cardsContainer}>
+              {!filteredCards
+                ? pokemons?.map((pokemon) => (
+                    <CardPokemon
+                      key={pokemon?.id}
+                      imageLink={pokemon?.images?.large}
+                    />
+                  ))
+                : filteredCards
+                    ?.slice(0, 40)
+                    ?.map((pokemon) => (
+                      <CardPokemon
+                        key={pokemon?.id}
+                        imageLink={pokemon?.images?.large}
+                      />
+                    ))}
+            </div>
+          )}
 
           {!loadingPokemons && filteredCards?.length > 0 && (
             <p className={styles.totalText}>

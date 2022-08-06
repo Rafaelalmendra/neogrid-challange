@@ -5,32 +5,58 @@
   flex-direction: column;
   padding: 6rem 1rem;
 
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+
   h2 {
     font-size: 2rem;
     font-weight: 700;
     color: @dark-1;
+
+    @media (max-width: 768px) {
+      font-size: 1.6rem;
+    }
   }
 
-  .filtersContainer {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    max-width: 800px;
-    flex-wrap: wrap;
-  }
-
-  .content {
+  .filters {
     display: flex;
     justify-content: space-between;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .typesContainer {
+      max-width: 800px;
+
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+
+      @media (max-width: 768px) {
+        justify-content: space-between;
+      }
+    }
   }
 
   .cardsContainer {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(4, 3fr);
+    grid-template-columns: repeat(auto-fit, minmax(252px, 1fr));
     grid-gap: 24px;
     justify-content: space-between;
     margin-top: 2rem;
+
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
 
   .totalText {
@@ -43,6 +69,10 @@
 
     strong {
       color: @blue;
+    }
+
+    @media (max-width: 768px) {
+      text-align: center;
     }
   }
 }

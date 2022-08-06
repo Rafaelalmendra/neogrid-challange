@@ -1,0 +1,31 @@
+@import "styles/colors.less";
+
+.carouselContainer {
+  position: relative;
+
+  svg {
+    fill: @blue;
+
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  .arrowLeft {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 0;
+  }
+
+  .arrowRight {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: 0;
+  }
+
+  .ant-carousel .slick-dots li.slick-active * {
+    color: @blue;
+    background: @blue;
+  }
+}
