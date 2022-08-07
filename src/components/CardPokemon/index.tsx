@@ -34,7 +34,6 @@ export const CardPokemon = ({ data }: CardPokemonProps) => {
           height={352}
           src={data?.images?.large}
           alt="Pokémon"
-          loading="eager"
         />
 
         <div className={styles.infos}>

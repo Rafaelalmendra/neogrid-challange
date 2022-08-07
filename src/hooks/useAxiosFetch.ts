@@ -36,6 +36,7 @@ export const useAxiosFetch = () => {
 
     const fetchPokemonData = async () => {
       setLoadingPokemons(true);
+
       try {
         const response = await api.request({
           method: "GET",
@@ -53,7 +54,7 @@ export const useAxiosFetch = () => {
       } finally {
         setTimeout(() => {
           setLoadingPokemons(false);
-        }, 500);
+        }, 1000);
       }
     };
 
