@@ -47,18 +47,15 @@ To start it, follow the steps below:
 
 ```bash
 # Clone the repository:
-
 $ git clone https://github.com/Rafaelalmendra/neogrid-challenge.git
 
 #Enter in the created directory
 $ cd neogrid-challenge
 
 # Install dependencies
-
 $ yarn
 
 # Start the project
-
 $ yarn dev
 ```
 
