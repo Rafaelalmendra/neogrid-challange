@@ -8,6 +8,9 @@ import { useAxiosFetch } from "hooks/useAxiosFetch";
 //design-system
 import { Input, Modal } from "antd";
 
+//mocks
+import filterTypes from "mocks/colorTypesMock.json";
+
 //components
 import { HeadSeo } from "components/HeadSeo";
 import { Loading } from "components/Loading";
@@ -17,12 +20,13 @@ import { LayoutPage } from "components/LayoutPage";
 import { CardPokemon } from "components/CardPokemon";
 import { FilterButton } from "components/FilterButton";
 import { CarouselCards } from "components/CarouselCards";
+import { CardDetailsModal } from "components/CardDetailsModal";
 
 //styles
 import styles from "styles/pages/pokemons.module.less";
-import { CardDetailsModal } from "@/components/CardDetailsModal";
 
 const PokemonsPage: NextPage = () => {
+  const types = filterTypes;
   const { Search } = Input;
   const isMobile = useMedia({ maxWidth: "768px" });
   const { pokemonData, typesData, loadingTypes, loadingPokemons } =
@@ -38,7 +42,7 @@ const PokemonsPage: NextPage = () => {
   useEffect(() => {
     setFilters(typesData);
     setPokemons(pokemonData);
-  }, [typesData, pokemonData]);
+  }, [pokemonData, typesData]);
 
   useEffect(() => {
     const lowerSearchByName = filterByName.toLowerCase();
@@ -73,16 +77,14 @@ const PokemonsPage: NextPage = () => {
     };
 
     handleFilters();
-  }, [filterByType, filterByName, pokemons, filteredPokemons]);
+  }, [filterByType, filterByName, filteredPokemons]);
 
   const handleFilterByType = (type: string) => {
     setFilterByName("");
     setFilterByType(type);
   };
 
-  const handleShowModalDetails = () => {
-    setShowModalDetails(true);
-  };
+  console.log(filteredPokemons);
 
   return (
     <>
@@ -101,8 +103,15 @@ const PokemonsPage: NextPage = () => {
             ) : (
               <div className={styles.typesContainer}>
                 <FilterButton
-                  active={filterByType === "all"}
                   onClick={() => handleFilterByType("all")}
+                  style={
+                    filterByType === "all"
+                      ? {
+                          backgroundColor: "#FEDC47",
+                          border: "1px solid #FEDC47",
+                        }
+                      : {}
+                  }
                 >
                   Todos
                 </FilterButton>
@@ -110,8 +119,17 @@ const PokemonsPage: NextPage = () => {
                 {filters?.map((filter, index: number) => (
                   <FilterButton
                     key={index}
-                    active={filterByType === filter}
                     onClick={() => handleFilterByType(filter)}
+                    active={filterByType === filter}
+                    style={
+                      filterByType === filter && types[index]?.name === filter
+                        ? {
+                            border: "1px solid #FEDC47",
+                            color: types[index]?.textColor,
+                            backgroundColor: types[index]?.color,
+                          }
+                        : {}
+                    }
                   >
                     {filter}
                   </FilterButton>
@@ -156,6 +174,9 @@ const PokemonsPage: NextPage = () => {
                 ? pokemons?.map((pokemon) => (
                     <CardPokemon
                       key={pokemon?.id}
+                      type={pokemon?.types[0]}
+                      subTypes={pokemon?.subtypes}
+                      weaknesses={pokemon?.weaknesses}
                       imageLink={pokemon?.images?.large}
                       onClick={() => setShowModalDetails(true)}
                     />
@@ -165,6 +186,10 @@ const PokemonsPage: NextPage = () => {
                     ?.map((pokemon) => (
                       <CardPokemon
                         key={pokemon?.id}
+                        type={pokemon?.types[0]}
+                        attacks={pokemon?.attacks}
+                        subTypes={pokemon?.subtypes}
+                        weaknesses={pokemon?.weaknesses}
                         imageLink={pokemon?.images?.large}
                         onClick={() => setShowModalDetails(true)}
                       />
@@ -178,7 +203,10 @@ const PokemonsPage: NextPage = () => {
         </main>
 
         <Modal
-          title="teste"
+          cancelText="Fechar"
+          title="Detalhes do Pikachu"
+          centered
+          footer={null}
           visible={showModalDetails}
           onCancel={() => setShowModalDetails(false)}
         >

@@ -1,15 +1,54 @@
+@import "styles/colors.less";
+
 .card {
   position: relative;
-  width: 252px;
+  width: 100%;
   height: 352px;
+
+  display: flex;
   transition: transform 0.3s ease-in-out;
   cursor: pointer;
+  border-radius: 10px;
+
+  @media (max-width: 768px) {
+    width: 252px;
+
+    .infos {
+      display: none;
+    }
+  }
 
   img {
     border-radius: 10px;
   }
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+  }
+}
+
+.infos {
+  margin: 16px;
+  color: @white;
+
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    font-weight: 500;
+    font-family: "Roboto", sans-serif;
+    text-shadow: 0 0 2px @dark-2;
+
+    margin-bottom: 6px;
+  }
+
+  span {
+    font-size: 0.875rem;
+    font-family: "Roboto", sans-serif;
+    text-shadow: 0 0 2px @dark-2;
   }
 }

@@ -5,21 +5,22 @@ import { Button } from "antd";
 import styles from "./styles.module.less";
 
 interface FilterButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
+  bgColor?: string;
   active?: boolean;
+  onClick?: () => void;
+  children: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 export const FilterButton = ({
-  children,
-  onClick,
+  bgColor,
   active,
+  onClick,
+  style,
+  children,
 }: FilterButtonProps) => {
   return (
-    <Button
-      className={`${styles.button} ${active && styles.activeButton}`}
-      onClick={onClick}
-    >
+    <Button className={`${styles.button}`} style={style} onClick={onClick}>
       {children}
     </Button>
   );
