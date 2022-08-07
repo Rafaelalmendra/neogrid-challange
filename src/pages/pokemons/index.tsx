@@ -6,7 +6,7 @@ import useMedia from "use-media";
 import { useAxiosFetch } from "hooks/useAxiosFetch";
 
 //design-system
-import { Input, Modal } from "antd";
+import { Input } from "antd";
 
 //mocks
 import filterTypes from "mocks/colorTypesMock.json";
@@ -20,7 +20,6 @@ import { LayoutPage } from "components/LayoutPage";
 import { CardPokemon } from "components/CardPokemon";
 import { FilterButton } from "components/FilterButton";
 import { CarouselCards } from "components/CarouselCards";
-import { CardDetailsModal } from "components/CardDetailsModal";
 
 //styles
 import styles from "styles/pages/pokemons.module.less";
@@ -37,7 +36,6 @@ const PokemonsPage: NextPage = () => {
   const [filters, setFilters] = useState<string[]>([]);
   const [filterByName, setFilterByName] = useState<string>("");
   const [filterByType, setFilterByType] = useState<string>("all");
-  const [showModalDetails, setShowModalDetails] = useState<boolean>(false);
 
   useEffect(() => {
     setFilters(typesData);
@@ -92,14 +90,14 @@ const PokemonsPage: NextPage = () => {
       />
 
       <LayoutPage>
-        <main className={styles.container}>
+        <main className={styles?.container}>
           <h2>Escolha seu tipo de Pokémon</h2>
 
-          <div className={styles.filters}>
+          <div className={styles?.filters}>
             {loadingTypes ? (
               <p>Buscando tipos...</p>
             ) : (
-              <div className={styles.typesContainer}>
+              <div className={styles?.typesContainer}>
                 <FilterButton
                   onClick={() => handleFilterByType("all")}
                   style={
@@ -150,47 +148,24 @@ const PokemonsPage: NextPage = () => {
             <CarouselCards>
               {!filteredPokemons
                 ? pokemons?.map((pokemon) => (
-                    <CardPokemon
-                      key={pokemon?.id}
-                      imageLink={pokemon?.images?.large}
-                      onClick={() => setShowModalDetails(true)}
-                    />
+                    <CardPokemon data={pokemon} key={pokemon?.id} />
                   ))
                 : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
-                      <CardPokemon
-                        key={pokemon?.id}
-                        imageLink={pokemon?.images?.large}
-                        onClick={() => setShowModalDetails(true)}
-                      />
+                      <CardPokemon data={pokemon} key={pokemon?.id} />
                     ))}
             </CarouselCards>
           ) : (
             <div className={styles.cardsContainer}>
               {!filteredPokemons
                 ? pokemonData?.map((pokemon: any) => (
-                    <CardPokemon
-                      key={pokemon?.id}
-                      type={pokemon?.types[0]}
-                      subTypes={pokemon?.subtypes}
-                      weaknesses={pokemon?.weaknesses}
-                      imageLink={pokemon?.images?.large}
-                      onClick={() => setShowModalDetails(true)}
-                    />
+                    <CardPokemon data={pokemon} key={pokemon?.id} />
                   ))
                 : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
-                      <CardPokemon
-                        key={pokemon?.id}
-                        type={pokemon?.types[0]}
-                        attacks={pokemon?.attacks}
-                        subTypes={pokemon?.subtypes}
-                        weaknesses={pokemon?.weaknesses}
-                        imageLink={pokemon?.images?.large}
-                        onClick={() => setShowModalDetails(true)}
-                      />
+                      <CardPokemon data={pokemon} key={pokemon?.id} />
                     ))}
             </div>
           )}
@@ -199,17 +174,6 @@ const PokemonsPage: NextPage = () => {
             <TotalCards total={filteredPokemons?.slice(0, 40)?.length} />
           )}
         </main>
-
-        <Modal
-          cancelText="Fechar"
-          title="Detalhes do Pikachu"
-          centered
-          footer={null}
-          visible={showModalDetails}
-          onCancel={() => setShowModalDetails(false)}
-        >
-          <CardDetailsModal />
-        </Modal>
       </LayoutPage>
     </>
   );

@@ -1,0 +1,51 @@
+@import "styles/colors.less";
+
+.containerDetails {
+  display: flex;
+
+  @media (max-width: 768px) {
+    .imageContainer {
+      display: none;
+    }
+  }
+}
+
+.infosContainer {
+  margin-left: 2.8125rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
+
+  p {
+    margin: 0;
+
+    color: @blue;
+    font-size: 1.2rem;
+    font-weight: 500;
+
+    strong {
+      color: @dark-2;
+      font-size: 1.125rem;
+    }
+  }
+
+  .name {
+    margin-bottom: 0.75rem;
+  }
+
+  .attacksContainer {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.75rem;
+
+    span {
+      max-width: 468px;
+      margin-left: 0.4rem;
+
+      color: @dark-2;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+  }
+}
