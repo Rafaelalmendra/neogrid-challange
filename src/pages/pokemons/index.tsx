@@ -45,46 +45,44 @@ const PokemonsPage: NextPage = () => {
   }, [pokemonData, typesData]);
 
   useEffect(() => {
-    const lowerSearchByName = filterByName.toLowerCase();
-
-    const handleFilters = () => {
-      if (filterByType === "all" || filterByName === "") {
-        const filterOnlyByName = pokemons?.filter((card: any) =>
-          card.name.toLowerCase().includes(lowerSearchByName)
-        );
-        setFilteredPokemons(filterOnlyByName);
-      }
-
-      if (!filterByName && filterByType !== "all") {
-        const filterOnlyByType = pokemons?.filter(
-          (card: any) => card.types[0] === filterByType
-        );
-        setFilteredPokemons(filterOnlyByType);
-      }
-
-      if (filterByName && filterByType !== "all") {
-        const filterByNameAndType = filteredPokemons?.filter(
-          (card) =>
-            card.name.toLowerCase().includes(lowerSearchByName) &&
-            card.types[0] === filterByType
-        );
-        setFilteredPokemons(filterByNameAndType);
-      }
-
-      if (!filterByName && filterByType === "all") {
-        setFilteredPokemons(pokemons);
-      }
-    };
-
     handleFilters();
-  }, [filterByType, filterByName, filteredPokemons]);
+  }, [filterByType, filterByName, pokemonData]);
+
+  const lowerSearchByName = filterByName.toLowerCase();
+
+  const handleFilters = () => {
+    if (filterByType === "all" || filterByName === "") {
+      const filterOnlyByName = pokemons?.filter((card: any) =>
+        card.name.toLowerCase().includes(lowerSearchByName)
+      );
+      setFilteredPokemons(filterOnlyByName);
+    }
+
+    if (!filterByName && filterByType !== "all") {
+      const filterOnlyByType = pokemons?.filter(
+        (card: any) => card.types[0] === filterByType
+      );
+      setFilteredPokemons(filterOnlyByType);
+    }
+
+    if (filterByName && filterByType !== "all") {
+      const filterByNameAndType = filteredPokemons?.filter(
+        (card) =>
+          card.name.toLowerCase().includes(lowerSearchByName) &&
+          card.types[0] === filterByType
+      );
+      setFilteredPokemons(filterByNameAndType);
+    }
+
+    if (!filterByName && filterByType === "all") {
+      setFilteredPokemons(pokemons);
+    }
+  };
 
   const handleFilterByType = (type: string) => {
     setFilterByName("");
     setFilterByType(type);
   };
-
-  console.log(filteredPokemons);
 
   return (
     <>
@@ -146,7 +144,7 @@ const PokemonsPage: NextPage = () => {
           </div>
 
           {loadingPokemons && <Loading />}
-          {filteredPokemons?.length === 0 && <NoResults />}
+          {pokemons && filteredPokemons?.length === 0 && <NoResults />}
 
           {isMobile ? (
             <CarouselCards>
@@ -171,7 +169,7 @@ const PokemonsPage: NextPage = () => {
           ) : (
             <div className={styles.cardsContainer}>
               {!filteredPokemons
-                ? pokemons?.map((pokemon) => (
+                ? pokemonData?.map((pokemon: any) => (
                     <CardPokemon
                       key={pokemon?.id}
                       type={pokemon?.types[0]}
