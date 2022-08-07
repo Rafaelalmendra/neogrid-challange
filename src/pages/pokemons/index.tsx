@@ -146,7 +146,7 @@ const PokemonsPage: NextPage = () => {
           </div>
 
           {loadingPokemons && <Loading />}
-          {!loadingPokemons && filteredPokemons?.length === 0 && <NoResults />}
+          {/* {!loadingPokemons && filteredPokemons?.length === 0 && <NoResults />} */}
 
           {isMobile ? (
             <CarouselCards>
