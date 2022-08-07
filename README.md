@@ -4,6 +4,15 @@
 
 <br/>
 
+
+<div align="center">
+
+ https://user-images.githubusercontent.com/70551452/183315439-fda2dd9f-e6cc-46aa-8504-455ce6a78992.mp4
+ 
+</div>
+
+
+
 <div align="center">
   <a href="https://pokemon-universe.vercel.app/" target="_blank">
     🌐 click here to access the deploy
