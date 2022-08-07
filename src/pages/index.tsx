@@ -17,27 +17,27 @@ const Home: NextPage = () => {
     <>
       <HeadSeo
         title="Home | Pokemon Universe"
-        content="Aqui você pode conhecer o tipo de Pokémon, seus pontos fortes,desvantagens e habilidades"
+        content="Here you can know the type of Pokémon, their strengths, disadvantages and abilities."
       />
 
       <LayoutPage>
         <main className={styles.container}>
           <div className={styles.content}>
             <h1>
-              Conheça todos os
+              Meet all the
               <br />
-              <strong>Pokémons</strong> e seus tipos
+              <strong>Pokémons</strong> and their types
             </h1>
 
             <p>
-              Você pode conhecer o tipo de Pokémon, seus pontos fortes,
-              desvantagens e habilidades
+              You can know the type of Pokémon, their strengths, disadvantages
+              and abilities
             </p>
 
             <Link href="/pokemons">
               <a>
                 <Button type="primary" size="large">
-                  Encontre seus Pokémons
+                  find your pokemons
                 </Button>
               </a>
             </Link>
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           <div className={styles.bannerContainer}>
             <Image
               src="/images/banner.png"
-              alt="Banner principal da página Pokémon Universe"
+              alt="Pokemon Universe main page banner"
               layout="fill"
             />
           </div>

@@ -20,7 +20,7 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.gstatic.com" />
           <meta
             property="example"
-            content="Você pode conhecer o tipo de Pokémon, seus pontos fortes, desvantagens e habilidades"
+            content="You can know the type of Pokémon, their strengths, disadvantages and abilities"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"

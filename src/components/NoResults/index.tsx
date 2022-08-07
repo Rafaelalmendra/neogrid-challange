@@ -12,7 +12,7 @@ export const NoResults = () => {
         width={179}
         height={142}
       />
-      <p>Nenhum resultado para este filtro!</p>
+      <p>No results for this filter</p>
     </div>
   );
 };

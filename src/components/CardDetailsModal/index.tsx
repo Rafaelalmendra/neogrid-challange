@@ -8,7 +8,6 @@ interface CardDetailsModalProps {
 }
 
 export const CardDetailsModal = ({ data }: CardDetailsModalProps) => {
-  console.log(data);
   return (
     <div className={styles.containerDetails}>
       <div className={styles.imageContainer}>

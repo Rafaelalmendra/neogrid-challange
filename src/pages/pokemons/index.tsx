@@ -85,17 +85,17 @@ const PokemonsPage: NextPage = () => {
   return (
     <>
       <HeadSeo
-        title="Descubra Pokemons | Pokemon Universe"
-        content="Aqui você pode descobrir todos os tipos de Pokémon"
+        title="Discover Pokemons | Pokemon Universe"
+        content="Here you can discover all types of Pokémon"
       />
 
       <LayoutPage>
         <main className={styles?.container}>
-          <h2>Escolha seu tipo de Pokémon</h2>
+          <h2>Choose your Pokemon type</h2>
 
           <div className={styles?.filters}>
             {loadingTypes ? (
-              <p>Buscando tipos...</p>
+              <p>Searching types...</p>
             ) : (
               <div className={styles?.typesContainer}>
                 <FilterButton
@@ -109,14 +109,13 @@ const PokemonsPage: NextPage = () => {
                       : {}
                   }
                 >
-                  Todos
+                  All
                 </FilterButton>
 
                 {filters?.map((filter, index: number) => (
                   <FilterButton
                     key={index}
                     onClick={() => handleFilterByType(filter)}
-                    active={filterByType === filter}
                     style={
                       filterByType === filter && types[index]?.name === filter
                         ? {
@@ -135,7 +134,7 @@ const PokemonsPage: NextPage = () => {
 
             <Search
               value={filterByName}
-              placeholder="Procure um Pokémon..."
+              placeholder="Search for a Pokemon..."
               style={{ width: isMobile ? "100%" : 258 }}
               onChange={(e) => setFilterByName(e?.target?.value)}
             />
@@ -159,9 +158,11 @@ const PokemonsPage: NextPage = () => {
           ) : (
             <div className={styles.cardsContainer}>
               {!filteredPokemons
-                ? pokemonData?.map((pokemon: any) => (
-                    <CardPokemon data={pokemon} key={pokemon?.id} />
-                  ))
+                ? pokemonData
+                    ?.slice(0, 40)
+                    ?.map((pokemon: any) => (
+                      <CardPokemon data={pokemon} key={pokemon?.id} />
+                    ))
                 : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (

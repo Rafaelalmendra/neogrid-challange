@@ -43,7 +43,7 @@ const menu = (
         key: "2",
         label: (
           <Link href="/pokemons">
-            <a>Pokémon</a>
+            <a>Pokémons</a>
           </Link>
         ),
       },
@@ -62,7 +62,7 @@ export const Navbar = () => {
           <a>
             <Image
               src="/images/logo.png"
-              alt="Logo Principal do Pokémon Universe"
+              alt="Pokemon Universe main logo"
               layout="fill"
             />
           </a>

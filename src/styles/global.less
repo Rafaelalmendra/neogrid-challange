@@ -1,3 +1,5 @@
+@import "styles/colors.less";
+
 * {
   margin: 0;
   padding: 0;
@@ -35,6 +37,7 @@ button {
   }
 }
 
+//pokemon-types-colors
 .Colorless {
   background: #dcd0bb;
 }
@@ -77,4 +80,16 @@ button {
 
 .Water {
   background: #5bb7f5;
+}
+
+//scrollbar-style
+::-webkit-scrollbar {
+  width: 0.625rem;
+}
+::-webkit-scrollbar-track {
+  background-color: #f0f2f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: @yellow;
 }

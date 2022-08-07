@@ -26,7 +26,7 @@ export const LayoutPage = ({ children }: LayoutProps) => {
 
       <Footer className={styles.footerContainer}>
         <span>
-          Feito com <HeartOutlined /> Por{" "}
+          Made with <HeartOutlined /> by{" "}
           <a href="https://rafaelalmendra.com" target="_blank" rel="noreferrer">
             Rafael Almendra
           </a>
