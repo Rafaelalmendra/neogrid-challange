@@ -62,7 +62,7 @@ export const Navbar = () => {
           <a>
             <Image
               src="/images/logo.png"
-              alt="Pokemon Universe main logo"
+              alt="Pokémon Universe main logo"
               layout="fill"
             />
           </a>

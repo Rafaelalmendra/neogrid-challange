@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   return (
     <>
       <HeadSeo
-        title="Home | Pokemon Universe"
+        title="Home | Pokémon Universe"
         content="Here you can know the type of Pokémon, their strengths, disadvantages and abilities."
       />
 
@@ -46,7 +46,7 @@ const Home: NextPage = () => {
           <div className={styles.bannerContainer}>
             <Image
               src="/images/banner.png"
-              alt="Pokemon Universe main page banner"
+              alt="Pokémon Universe main page banner"
               layout="fill"
             />
           </div>

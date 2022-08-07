@@ -30,7 +30,7 @@ export const CardPokemon = ({ data }: CardPokemonProps) => {
           width={252}
           height={352}
           src={data?.images?.large}
-          alt="Pokemon"
+          alt="Pokémon"
         />
 
         <div className={styles.infos}>

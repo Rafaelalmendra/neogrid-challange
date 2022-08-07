@@ -85,13 +85,13 @@ const PokemonsPage: NextPage = () => {
   return (
     <>
       <HeadSeo
-        title="Discover Pokemons | Pokemon Universe"
+        title="Discover Pokemons | Pokémon Universe"
         content="Here you can discover all types of Pokémon"
       />
 
       <LayoutPage>
         <main className={styles?.container}>
-          <h2>Choose your Pokemon type</h2>
+          <h2>Choose your Pokémon type</h2>
 
           <div className={styles?.filters}>
             {loadingTypes ? (
@@ -134,7 +134,7 @@ const PokemonsPage: NextPage = () => {
 
             <Search
               value={filterByName}
-              placeholder="Search for a Pokemon..."
+              placeholder="Search for a Pokémon..."
               style={{ width: isMobile ? "100%" : 258 }}
               onChange={(e) => setFilterByName(e?.target?.value)}
             />
