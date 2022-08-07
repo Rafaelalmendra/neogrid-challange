@@ -5,9 +5,11 @@ import { Content, Footer, Header } from "antd/lib/layout/layout";
 //icons
 import { HeartOutlined } from "@ant-design/icons";
 
+//components
+import { Navbar } from "../Navbar";
+
 //styles
 import styles from "./styles.module.less";
-import { Navbar } from "../Navbar";
 
 interface LayoutProps {
   children: React.ReactNode;

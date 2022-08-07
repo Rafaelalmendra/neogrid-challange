@@ -8,7 +8,7 @@ import "antd/dist/antd.less";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ConfigProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </ConfigProvider>
   );
 }
