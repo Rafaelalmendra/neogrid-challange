@@ -20,7 +20,7 @@
 </div>
 
 <p align="center">
-  <a href="https://pokemon-universe.vercel.app/" target="_blank">
+  <a href="https://www.figma.com/file/DfvfNzNN9G3djwha2R3ckD/Pokemon-Catalog?node-id=0%3A1" target="_blank">
     🖌️ click here to access the Figma
   </a>
 </p>
