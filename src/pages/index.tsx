@@ -37,7 +37,7 @@ const Home: NextPage = () => {
             <Link href="/pokemons">
               <a>
                 <Button type="primary" size="large">
-                  find your pokemons
+                  Find your pokemons
                 </Button>
               </a>
             </Link>
