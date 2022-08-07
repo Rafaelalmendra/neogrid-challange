@@ -49,7 +49,7 @@ To start it, follow the steps below:
 # Clone the repository:
 $ git clone https://github.com/Rafaelalmendra/neogrid-challenge.git
 
-#Enter in the created directory
+# Enter in the created directory
 $ cd neogrid-challenge
 
 # Install dependencies
