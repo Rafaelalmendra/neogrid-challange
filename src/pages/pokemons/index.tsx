@@ -34,7 +34,6 @@ const PokemonsPage: NextPage = () => {
   const { pokemonData, typesData, loadingTypes, loadingPokemons } =
     useAxiosFetch();
 
-  const [pokemons, setPokemons] = useState<pokemonDataProps[]>([]);
   const [filteredPokemons, setFilteredPokemons] = useState<pokemonDataProps[]>(
     []
   );
@@ -44,7 +43,6 @@ const PokemonsPage: NextPage = () => {
 
   useEffect(() => {
     setFilters(typesData);
-    setPokemons(pokemonData);
   }, [pokemonData, typesData]);
 
   useEffect(() => {
@@ -55,14 +53,14 @@ const PokemonsPage: NextPage = () => {
 
   const handleFilters = () => {
     if (filterByType === "all" || filterByName === "") {
-      const filterOnlyByName = pokemons?.filter((card: pokemonDataProps) =>
+      const filterOnlyByName = pokemonData?.filter((card: pokemonDataProps) =>
         card.name.toLowerCase().includes(lowerSearchByName)
       );
       setFilteredPokemons(filterOnlyByName);
     }
 
     if (!filterByName && filterByType !== "all") {
-      const filterOnlyByType = pokemons?.filter(
+      const filterOnlyByType = pokemonData?.filter(
         (card: pokemonDataProps) => card.types[0] === filterByType
       );
       setFilteredPokemons(filterOnlyByType);
@@ -78,7 +76,7 @@ const PokemonsPage: NextPage = () => {
     }
 
     if (!filterByName && filterByType === "all") {
-      setFilteredPokemons(pokemons);
+      setFilteredPokemons(pokemonData);
     }
   };
 
@@ -146,12 +144,12 @@ const PokemonsPage: NextPage = () => {
           </div>
 
           {loadingPokemons && <Loading />}
-          {/* {!loadingPokemons && filteredPokemons?.length === 0 && <NoResults />} */}
+          {!loadingPokemons && filteredPokemons?.length === 0 && <NoResults />}
 
           {isMobile ? (
             <CarouselCards>
               {!filteredPokemons
-                ? pokemons
+                ? pokemonData
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
                       <CardPokemon data={pokemon} key={pokemon?.id} />
@@ -165,7 +163,7 @@ const PokemonsPage: NextPage = () => {
           ) : (
             <div className={styles.cardsContainer}>
               {!filteredPokemons
-                ? pokemons
+                ? pokemonData
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
                       <CardPokemon data={pokemon} key={pokemon?.id} />
