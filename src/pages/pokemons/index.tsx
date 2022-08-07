@@ -5,6 +5,9 @@ import useMedia from "use-media";
 //hooks
 import { useAxiosFetch } from "hooks/useAxiosFetch";
 
+//types
+import { pokemonDataProps } from "types";
+
 //design-system
 import { Input } from "antd";
 
@@ -31,8 +34,10 @@ const PokemonsPage: NextPage = () => {
   const { pokemonData, typesData, loadingTypes, loadingPokemons } =
     useAxiosFetch();
 
-  const [pokemons, setPokemons] = useState<any[]>([]);
-  const [filteredPokemons, setFilteredPokemons] = useState<any[]>([]);
+  const [pokemons, setPokemons] = useState<pokemonDataProps[]>([]);
+  const [filteredPokemons, setFilteredPokemons] = useState<pokemonDataProps[]>(
+    []
+  );
   const [filters, setFilters] = useState<string[]>([]);
   const [filterByName, setFilterByName] = useState<string>("");
   const [filterByType, setFilterByType] = useState<string>("all");
@@ -50,7 +55,7 @@ const PokemonsPage: NextPage = () => {
 
   const handleFilters = () => {
     if (filterByType === "all" || filterByName === "") {
-      const filterOnlyByName = pokemons?.filter((card: any) =>
+      const filterOnlyByName = pokemons?.filter((card: pokemonDataProps) =>
         card.name.toLowerCase().includes(lowerSearchByName)
       );
       setFilteredPokemons(filterOnlyByName);
@@ -58,7 +63,7 @@ const PokemonsPage: NextPage = () => {
 
     if (!filterByName && filterByType !== "all") {
       const filterOnlyByType = pokemons?.filter(
-        (card: any) => card.types[0] === filterByType
+        (card: pokemonDataProps) => card.types[0] === filterByType
       );
       setFilteredPokemons(filterOnlyByType);
     }
@@ -81,6 +86,9 @@ const PokemonsPage: NextPage = () => {
     setFilterByName("");
     setFilterByType(type);
   };
+
+  console.log("pokemons", pokemons);
+  console.log("filteredPokemons", filteredPokemons);
 
   return (
     <>
@@ -141,14 +149,16 @@ const PokemonsPage: NextPage = () => {
           </div>
 
           {loadingPokemons && <Loading />}
-          {pokemons && filteredPokemons?.length === 0 && <NoResults />}
+          {!loadingPokemons && filteredPokemons.length === 0 && <NoResults />}
 
           {isMobile ? (
             <CarouselCards>
               {!filteredPokemons
-                ? pokemons?.map((pokemon) => (
-                    <CardPokemon data={pokemon} key={pokemon?.id} />
-                  ))
+                ? pokemons
+                    ?.slice(0, 40)
+                    ?.map((pokemon) => (
+                      <CardPokemon data={pokemon} key={pokemon?.id} />
+                    ))
                 : filteredPokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
@@ -160,7 +170,7 @@ const PokemonsPage: NextPage = () => {
               {!filteredPokemons
                 ? pokemonData
                     ?.slice(0, 40)
-                    ?.map((pokemon: any) => (
+                    ?.map((pokemon) => (
                       <CardPokemon data={pokemon} key={pokemon?.id} />
                     ))
                 : filteredPokemons

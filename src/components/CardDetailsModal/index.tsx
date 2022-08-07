@@ -1,10 +1,13 @@
 import Image from "next/image";
 
+//types
+import { pokemonDataProps } from "types";
+
 //styles
 import styles from "./styles.module.less";
 
 interface CardDetailsModalProps {
-  data: any;
+  data: pokemonDataProps;
 }
 
 export const CardDetailsModal = ({ data }: CardDetailsModalProps) => {
@@ -24,7 +27,7 @@ export const CardDetailsModal = ({ data }: CardDetailsModalProps) => {
           Name: <strong>{data?.name}</strong>
         </p>
 
-        {data?.attacks?.map((attack: any, index: number) => (
+        {data?.attacks?.map((attack, index: number) => (
           <div key={index} className={styles.attacksContainer}>
             <p>Attack {index + 1}:</p>
             <span>Name: {attack?.name}</span>

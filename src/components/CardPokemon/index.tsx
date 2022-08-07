@@ -2,6 +2,9 @@ import { useState } from "react";
 import Image from "next/image";
 import useMedia from "use-media";
 
+//types
+import { pokemonDataProps } from "types";
+
 //design-system
 import { Modal } from "antd";
 
@@ -12,7 +15,7 @@ import { CardDetailsModal } from "../CardDetailsModal";
 import styles from "./styles.module.less";
 
 interface CardPokemonProps {
-  data: any;
+  data: pokemonDataProps;
 }
 
 export const CardPokemon = ({ data }: CardPokemonProps) => {
@@ -31,6 +34,7 @@ export const CardPokemon = ({ data }: CardPokemonProps) => {
           height={352}
           src={data?.images?.large}
           alt="Pokémon"
+          loading="eager"
         />
 
         <div className={styles.infos}>
@@ -43,14 +47,14 @@ export const CardPokemon = ({ data }: CardPokemonProps) => {
 
           <div className={styles.infoSection}>
             <p>Weaknesses:</p>
-            {data?.weaknesses?.map((weaknesses: any, index: number) => (
+            {data?.weaknesses?.map((weaknesses, index: number) => (
               <span key={index}>- {weaknesses?.type}</span>
             ))}
           </div>
 
           <div className={styles.infoSection}>
             <p>Attacks:</p>
-            {data?.attacks?.map((attacks: any, index: number) => (
+            {data?.attacks?.map((attacks, index: number) => (
               <span key={index}>- {attacks?.name}</span>
             ))}
           </div>

@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { api } from "services/api";
 
+//types
+import { pokemonDataProps } from "types";
+
 export const useAxiosFetch = () => {
-  const [typesData, setTypesData] = useState<any>(null);
-  const [pokemonData, setPokemonData] = useState<any>(null);
-
-  const [loadingTypes, setLoadingTypes] = useState(false);
-  const [loadingPokemons, setLoadingPokemons] = useState(false);
-
-  const [fetchError, setFetchError] = useState("");
+  const [typesData, setTypesData] = useState<string[]>([]);
+  const [pokemonData, setPokemonData] = useState<pokemonDataProps[]>([]);
+  const [loadingTypes, setLoadingTypes] = useState<boolean>(false);
+  const [loadingPokemons, setLoadingPokemons] = useState<boolean>(false);
 
   const token = process.env.API_KEY;
 
@@ -26,10 +26,9 @@ export const useAxiosFetch = () => {
         });
         if (response.status === 200) {
           setTypesData(response.data.data);
-          setFetchError("");
         }
-      } catch (error: any) {
-        setFetchError(error.message);
+      } catch (error) {
+        console.log(error);
       } finally {
         setLoadingTypes(false);
       }
@@ -48,12 +47,13 @@ export const useAxiosFetch = () => {
         });
         if (response.status === 200) {
           setPokemonData(response.data.data);
-          setFetchError("");
         }
-      } catch (error: any) {
-        setFetchError(error.message);
+      } catch (error) {
+        console.log(error);
       } finally {
-        setLoadingPokemons(false);
+        setTimeout(() => {
+          setLoadingPokemons(false);
+        }, 500);
       }
     };
 
@@ -61,5 +61,5 @@ export const useAxiosFetch = () => {
     fetchPokemonData();
   }, [token]);
 
-  return { pokemonData, typesData, fetchError, loadingTypes, loadingPokemons };
+  return { pokemonData, typesData, loadingTypes, loadingPokemons };
 };
