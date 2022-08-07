@@ -87,9 +87,6 @@ const PokemonsPage: NextPage = () => {
     setFilterByType(type);
   };
 
-  console.log("pokemons", pokemons);
-  console.log("filteredPokemons", filteredPokemons);
-
   return (
     <>
       <HeadSeo
@@ -149,7 +146,7 @@ const PokemonsPage: NextPage = () => {
           </div>
 
           {loadingPokemons && <Loading />}
-          {!loadingPokemons && filteredPokemons.length === 0 && <NoResults />}
+          {!loadingPokemons && filteredPokemons?.length === 0 && <NoResults />}
 
           {isMobile ? (
             <CarouselCards>
@@ -168,7 +165,7 @@ const PokemonsPage: NextPage = () => {
           ) : (
             <div className={styles.cardsContainer}>
               {!filteredPokemons
-                ? pokemonData
+                ? pokemons
                     ?.slice(0, 40)
                     ?.map((pokemon) => (
                       <CardPokemon data={pokemon} key={pokemon?.id} />
